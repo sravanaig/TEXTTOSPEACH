@@ -1,0 +1,5 @@
+{
+  "name": "Vani TTS - English & Telugu",
+  "description": "A sophisticated text-to-speech application supporting English and Telugu with natural accents, powered by Gemini 2.5 TTS. Features generative accent control and high-fidelity audio playback.",
+  "requestFramePermissions": []
+}
