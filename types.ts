@@ -20,10 +20,11 @@ export enum VoiceName {
   PUCK = 'Puck',
   CHARON = 'Charon',
   FENRIR = 'Fenrir',
-  ZEPHYR = 'Zephyr'
+  ZEPHYR = 'Zephyr',
+  CLONED = 'Cloned' // Sentinel for custom voices
 }
 
-export const VOICE_METADATA: Record<VoiceName, { label: string; gender: 'Male' | 'Female' }> = {
+export const VOICE_METADATA: Record<string, { label: string; gender: 'Male' | 'Female' | 'Custom' }> = {
   [VoiceName.KORE]: { label: 'Anjali', gender: 'Female' },
   [VoiceName.ZEPHYR]: { label: 'Siri', gender: 'Female' },
   [VoiceName.PUCK]: { label: 'Arjun', gender: 'Male' },
@@ -31,12 +32,20 @@ export const VOICE_METADATA: Record<VoiceName, { label: string; gender: 'Male' |
   [VoiceName.FENRIR]: { label: 'Rajesh', gender: 'Male' },
 };
 
+export interface ClonedVoice {
+  id: string;
+  name: string;
+  audioData: string; // base64
+  mimeType: string;
+  timestamp: number;
+}
+
 export interface TTSPreset {
   id: string;
   name: string;
   language: Language;
   accent: Accent;
-  voice: VoiceName;
+  voice: VoiceName | string; // Can be a ClonedVoice ID
   speed: number;
   pitch: number;
   volume: number;
@@ -47,19 +56,11 @@ export interface TTSHistoryItem {
   text: string;
   language: Language;
   accent: Accent;
-  voice: VoiceName;
+  voice: VoiceName | string;
   speed: number;
   pitch: number;
   volume: number;
   timestamp: number;
   audioData?: string; // base64
-}
-
-export interface TTSConfig {
-  voice: VoiceName;
-  language: Language;
-  accent: Accent;
-  speed: number;
-  pitch: number;
-  volume: number;
+  isCloned?: boolean;
 }
